@@ -1,0 +1,60 @@
+<section id="Movie">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="form-wrap">
+                    <!-- Movie Data Submit form-->
+                    <h2>Add Movie</h2>
+                    <form #movieForm="ngForm" (ngSubmit)="addMovie()">
+                        <div class="form-group">
+                            <label> Image URL </label>
+                            <input type="text" class="form-control" [(ngModel)]="currentMovie.imageUrl" name="imageUrl" placeholder="Image URL e.g https://upload.wikimedia.org/wikipedia/en/0/04/Tubelight_Poster.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label> Movie Name </label>
+                            <input type="text" class="form-control" [(ngModel)]="currentMovie.name" name="name" placeholder="Movie Name">
+                        </div>
+                        <div class="form-group">
+                            <label> Movie Description </label>
+                            <input type="text" class="form-control" [(ngModel)]="currentMovie.description" name="description" placeholder="Moview Description">
+                        </div>
+                         <div class="form-group">
+                            <label> Rating </label>
+                            <select class="form-control" [(ngModel)]="currentMovie.movieRatings" name="rating" >
+                                <option [value]="rating" [disabled]="true">Select Option</option>
+                                <option *ngFor = "let rating of movieRatings" [ngValue]="rating.title">
+                                    {{rating.title}}
+                                </option>
+                            </select>
+                        </div>
+                        <input type="submit" class="btn btn-primary btn-block" value="Add" [disabled]="movieForm.invalid">
+                    </form>
+                </div>
+            </div>
+        </div><!-- User Submission form -->
+        <br/>
+        <br/>
+          <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <!-- Show User list when it has records-->
+                <table *ngIf="listOfMovies.length > 0" class="table table-striped table-bordered">
+                    <tr>
+                        <th> Index</th>
+                        <th> Movie Poster</th>
+                        <th> Movie Name</th>
+                        <th> Movie Description</th>
+                        <th> Rating</th>
+                    </tr>
+                    <!-- Looping through userlist-->
+                    <tr *ngFor="let movie of listOfMovies; let i=index;">
+                        <td>{{i + 1}}</td>
+                        <td><img [src]="movie.imageUrl" [alt]="movie.name" width="75"/></td>
+                        <td>{{movie.name}}</td>
+                        <td>{{movie.description}}</td>
+                        <td>{{movie.movieRatings}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div><!-- Movie List -->
+    </div>
+</section>
