@@ -18,16 +18,18 @@ export class MovieComponent {
     // Rating list array.
     movieRatings: IRating[] = [];
 
+    // Injecting services into constructor. 
     constructor(private _movieService: MovieService, private _ratingService: RatingService) {}
 
-
+    // Initialising drop down and movies
     ngOnInit() {
         this.listOfMovies = this._movieService.getMovieList();
         this.movieRatings = this._ratingService.getRatings();
     }
 
+    // Adding movie to movie list
     addMovie() {
         this._movieService.addMovie(this.currentMovie);
-        this.currentMovie = new Movie();
+        this.currentMovie = new Movie(); // Clearing Object.
     }
 }
